@@ -49,6 +49,27 @@ const ContactForm = ({ getContact }) => {
   );
 };
 
+const Table = ({ contacts }) => {
+  return (
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        {contacts.map((contact, index) => (
+          <tr key={index}>
+            <td>{contact.name}</td>
+            <td>{contact.email}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+};
+
 const App = () => {
   const [contacts, setContacts] = useState([]);
 
@@ -66,6 +87,7 @@ const App = () => {
     <div>
       <h1>Basic Contact Diary</h1>
       <ContactForm getContact={getContact} />
+      <Table contacts={contacts} />
     </div>
   );
 };
