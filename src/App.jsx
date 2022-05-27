@@ -5,7 +5,7 @@ const CONTACT_FORM_INIT_STATE = {
   email: '',
 };
 
-const ContactForm = ({ getData }) => {
+const ContactForm = ({ getContact }) => {
   const [values, setValues] = useState({ ...CONTACT_FORM_INIT_STATE });
   const { name, email } = values;
 
@@ -16,7 +16,7 @@ const ContactForm = ({ getData }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log(values);
-    getData(values);
+    getContact(values);
   };
 
   return (
@@ -50,18 +50,22 @@ const ContactForm = ({ getData }) => {
 };
 
 const App = () => {
-  const getData = (values) => {
+  const [contacts, setContacts] = useState([]);
+
+  const getContact = (contact) => {
     // console.log(values);
     // console.log('Calling getData Function');
+    // console.log('Printing from App Component');
+    // console.log(values.name);
+    // console.log(values.email);
 
-    console.log(values.name);
-    console.log(values.email);
+    setContacts([].concat(contacts, contact));
   };
 
   return (
     <div>
       <h1>Basic Contact Diary</h1>
-      <ContactForm getData={getData} />
+      <ContactForm getContact={getContact} />
     </div>
   );
 };
