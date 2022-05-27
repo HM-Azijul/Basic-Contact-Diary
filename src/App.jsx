@@ -17,6 +17,8 @@ const ContactForm = ({ getContact }) => {
     e.preventDefault();
     // console.log(values);
     getContact(values);
+
+    setValues({ ...CONTACT_FORM_INIT_STATE }); //clear data
   };
 
   return (
