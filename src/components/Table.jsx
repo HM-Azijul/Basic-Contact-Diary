@@ -15,6 +15,14 @@ const Table = ({ contacts }) => {
     filterContacts = contacts.filter((contact) => contact.group === filter);
   }
 
+  const [searchForm, setSearchForm] = useState('');
+  if (searchForm) {
+    filterContacts = filterContacts.filter(
+      (contact) =>
+        contact.name.includes(searchForm) || contact.email.includes(searchForm)
+    );
+  }
+
   return (
     <>
       <div>
@@ -26,6 +34,12 @@ const Table = ({ contacts }) => {
           <option value="Home">Home</option>
           <option value="Office">Office</option>
         </select>
+        <input
+          type="search"
+          placeholder="search"
+          value={searchForm}
+          onChange={(e) => setSearchForm(e.target.value)}
+        />
       </div>
 
       <table>
