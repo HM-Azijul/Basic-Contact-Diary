@@ -6,20 +6,19 @@ const Table = ({ contacts }) => {
     setFilter(e.target.value);
   };
 
+  const [searchForm, setSearchForm] = useState('');
+  const searchCB = (contact) =>
+    contact.name.includes(searchForm) || contact.email.includes(searchForm); //searchCB means search call back
+
   let filterContacts = [];
   if (filter === 'All') {
-    filterContacts = contacts;
+    // filterContacts = contacts;
+    filterContacts = searchForm ? contacts.filter(searchCB) : contacts;
   }
   //else if (filter === 'None') { filterContacts = contacts.filter((contact) => contact.group === ''); }
   else {
-    filterContacts = contacts.filter((contact) => contact.group === filter);
-  }
-
-  const [searchForm, setSearchForm] = useState('');
-  if (searchForm) {
-    filterContacts = filterContacts.filter(
-      (contact) =>
-        contact.name.includes(searchForm) || contact.email.includes(searchForm)
+    filterContacts = contacts.filter(
+      (contact) => contact.group === filter && searchCB(contact)
     );
   }
 
